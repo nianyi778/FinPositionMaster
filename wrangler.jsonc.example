@@ -15,38 +15,32 @@
   },
 
   // Configures automatic observability settings for telemetry data emitted from your Worker.
+  "workers_dev": false,
+  "preview_urls": false,
   "observability": {
     "enabled": true
   },
 
   // KV namespaces configuration.
-  "kv_namespaces": [
+    "kv_namespaces": [
     {
-      "binding": "APP_KV",
-      "id": "app_kv_id",
-      "preview_id": "app_kv_preview_id"
+      "binding": "vix",
+      "id": "b53dca328e9946b8a44249274eda128e",
+      "preview_id": "b53dca328e9946b8a44249274eda128e"
     }
   ],
-
   // D1 databases configuration.
   "d1_databases": [
     {
-      "binding": "DB",
+      "binding": "vix",
       "database_name": "rr7-better-auth",
-      "database_id": "d1_db_id",
-      "preview_database_id": "d1_db_preview_id",
+      "database_id": "b54ebca2-ad37-4239-a3ce-1f2e9cd7e6ff",
+      "preview_database_id": "b54ebca2-ad37-4239-a3ce-1f2e9cd7e6ff",
       "migrations_dir": "drizzle"
     }
   ],
 
   // R2 buckets configuration.
-  "r2_buckets": [
-    {
-      "bucket_name": "rr7-better-auth",
-      "binding": "R2"
-    }
-  ],
-
   // Environment Variables.
   "vars": {
     "ENVIRONMENT": "development",

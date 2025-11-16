@@ -8,7 +8,7 @@
     "deploy": "react-router build && NODE_ENV=production wrangler deploy",
     "deploy:version": "react-router build && wrangler versions upload",
     "deploy:promote": "wrangler versions deploy",
-    "start": "wrangler dev --test-scheduled",
+    "start": "pnpm build && wrangler dev --test-scheduled",
     "typecheck": "tsc",
     "typegen": "wrangler types && react-router typegen",
     "check": "biome check .",

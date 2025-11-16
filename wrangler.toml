@@ -25,10 +25,6 @@ database_id = "d1_db_id"
 preview_database_id = "d1_db_preview_id"
 migrations_dir = "drizzle"
 
-[[r2_buckets]]
-bucket_name = "rr7-better-auth"
-binding = "R2"
-
 [vars]
 ENVIRONMENT = "development"
 BETTER_AUTH_SECRET = "3ebc25b381e87193f29ffea6b6d380dd"

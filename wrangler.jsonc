@@ -40,13 +40,6 @@
   ],
 
   // R2 buckets configuration.
-  "r2_buckets": [
-    {
-      "bucket_name": "rr7-better-auth",
-      "binding": "R2"
-    }
-  ],
-
   // Environment Variables.
   "vars": {
     "ENVIRONMENT": "development",

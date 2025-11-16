@@ -24,7 +24,7 @@
   // KV namespaces configuration.
     "kv_namespaces": [
     {
-      "binding": "vix",
+      "binding": "kv_vix",
       "id": "b53dca328e9946b8a44249274eda128e",
       "preview_id": "b53dca328e9946b8a44249274eda128e"
     }
@@ -32,7 +32,7 @@
   // D1 databases configuration.
   "d1_databases": [
     {
-      "binding": "vix",
+      "binding": "d1_vix",
       "database_name": "rr7-better-auth",
       "database_id": "b54ebca2-ad37-4239-a3ce-1f2e9cd7e6ff",
       "preview_database_id": "b54ebca2-ad37-4239-a3ce-1f2e9cd7e6ff",
@@ -40,7 +40,6 @@
     }
   ],
 
-  // R2 buckets configuration.
   // Environment Variables.
   "vars": {
     "ENVIRONMENT": "development",

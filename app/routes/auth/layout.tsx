@@ -6,7 +6,7 @@ export async function loader({ request }: Route.LoaderArgs) {
   const session = await getServerSession(request);
 
   if (session) {
-    throw redirect(href("/home"));
+    throw redirect(href("/admin"));
   }
 
   return null;

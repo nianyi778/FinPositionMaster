@@ -7,12 +7,9 @@ import {
 } from "@react-router/dev/routes";
 
 export default [
-  index("routes/index.tsx"),
-
   // User routes
   layout("routes/layout.tsx", [
-    route("home", "routes/home.tsx"),
-    route("todos", "routes/todos.tsx"),
+    index("routes/index.tsx"),
 
     ...prefix("settings", [
       layout("routes/settings/layout.tsx", [
@@ -39,7 +36,19 @@ export default [
   // Admin routes
   ...prefix("admin", [
     layout("routes/admin/layout.tsx", [
-      index("routes/admin/dashboard.tsx"),
+      index("routes/admin/index.tsx"),
+      route("dashboard", "routes/admin/dashboard.tsx"),
+      route("accounts", "routes/admin/accounts/index.tsx"),
+      route("accounts/settings", "routes/admin/accounts/settings.tsx"),
+      route(
+        "accounts/:accountId/dashboard",
+        "routes/admin/accounts/$accountId/dashboard.tsx",
+      ),
+      route(
+        "accounts/:accountId/detail",
+        "routes/admin/accounts/$accountId/detail.tsx",
+      ),
+      route("analytics", "routes/admin/analytics.tsx"),
       route("users", "routes/admin/users/index.tsx"),
     ]),
   ]),

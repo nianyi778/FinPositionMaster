@@ -1,5 +1,6 @@
 import {
   GaugeIcon,
+  LayersIcon,
   SettingsIcon,
   ShieldIcon,
   UserCogIcon,
@@ -47,6 +48,11 @@ export const navigationGroups: NavGroupData[] = [
         url: href("/admin"),
       },
       {
+        icon: LayersIcon,
+        title: "Accounts",
+        url: href("/admin/accounts"),
+      },
+      {
         icon: UsersIcon,
         title: "Users",
         url: href("/admin/users"),
@@ -66,6 +72,11 @@ export const navigationGroups: NavGroupData[] = [
         icon: ShieldIcon,
         title: "Permissions",
         url: "/admin/permissions",
+      },
+      {
+        icon: LayersIcon,
+        title: "账户设置",
+        url: href("/admin/accounts/settings"),
       },
       {
         title: "Settings",

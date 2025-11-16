@@ -9,7 +9,7 @@ export const middleware = [requireAuth];
 
 export async function loader(_: Route.LoaderArgs) {
   const user = requireUser();
-  if (user.user.role !== "admin") throw redirect(href("/home"));
+  if (user.user.role !== "admin") throw redirect(href("/"));
   return data(user);
 }
 

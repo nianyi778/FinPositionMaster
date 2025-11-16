@@ -1,56 +1,48 @@
 {
-  "$schema": "node_modules/wrangler/config-schema.json",
-  "name": "rr7-better-auth",
-  "main": "./workers/app.ts",
-
-  "compatibility_date": "2025-04-04",
-  "compatibility_flags": [
-    "nodejs_compat",
-    "nodejs_compat_populate_process_env"
-  ],
-
-  // Assets configuration.
-  "assets": {
-    "directory": "./build/client/"
-  },
-
-  // Configures automatic observability settings for telemetry data emitted from your Worker.
-  "workers_dev": false,
-  "preview_urls": false,
-  "observability": {
-    "enabled": true
-  },
-
-  // KV namespaces configuration.
-    "kv_namespaces": [
-    {
-      "binding": "vix",
-      "id": "b53dca328e9946b8a44249274eda128e",
-      "preview_id": "b53dca328e9946b8a44249274eda128e"
-    }
-  ],
-  // D1 databases configuration.
-  "d1_databases": [
-    {
-      "binding": "vix",
-      "database_name": "rr7-better-auth",
-      "database_id": "b54ebca2-ad37-4239-a3ce-1f2e9cd7e6ff",
-      "preview_database_id": "b54ebca2-ad37-4239-a3ce-1f2e9cd7e6ff",
-      "migrations_dir": "drizzle"
-    }
-  ],
-
-  // R2 buckets configuration.
-  // Environment Variables.
-  "vars": {
-    "ENVIRONMENT": "development",
-
-    // BetterAuth configuration
-    "BETTER_AUTH_SECRET": "3ebc25b381e87193f29ffea6b6d380dd", // https://generate-secret.vercel.app/32
-    "BETTER_AUTH_URL": "http://localhost:5173",
-    "GITHUB_CLIENT_ID": "...",
-    "GITHUB_CLIENT_SECRET": "...",
-    "GOOGLE_CLIENT_ID": "...",
-    "GOOGLE_CLIENT_SECRET": "..."
-  }
+	"$schema": "node_modules/wrangler/config-schema.json",
+	"name": "rr7-better-auth",
+	"main": "./workers/app.ts",
+	"compatibility_date": "2025-04-04",
+	"compatibility_flags": [
+		"nodejs_compat",
+		"nodejs_compat_populate_process_env"
+	],
+	// Assets configuration.
+	"assets": {
+		"directory": "./build/client/"
+	},
+	// Configures automatic observability settings for telemetry data emitted from your Worker.
+	"workers_dev": false,
+	"preview_urls": false,
+	"observability": {
+		"enabled": true
+	},
+	// KV namespaces configuration.
+	"kv_namespaces": [
+		{
+			"binding": "APP_KV",
+			"id": "f87400dad89949d28f247087a0471a1b",
+			"remote": true
+		}
+	],
+	// D1 databases configuration.
+	"d1_databases": [
+		{
+			"binding": "DB",
+			"database_name": "DB",
+			"database_id": "ef89a6f5-4122-4e5a-853a-b16ad8a45ee9",
+			"remote": true
+		}
+	],
+	// Environment Variables.
+	"vars": {
+		"ENVIRONMENT": "development",
+		// BetterAuth configuration
+		"BETTER_AUTH_SECRET": "3ebc25b381e87193f29ffea6b6d380dd", // https://generate-secret.vercel.app/32
+		"BETTER_AUTH_URL": "http://localhost:5173",
+		"GITHUB_CLIENT_ID": "...",
+		"GITHUB_CLIENT_SECRET": "...",
+		"GOOGLE_CLIENT_ID": "...",
+		"GOOGLE_CLIENT_SECRET": "..."
+	}
 }

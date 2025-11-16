@@ -1,0 +1,38 @@
+name = "rr7-better-auth"
+main = "./workers/app.ts"
+
+compatibility_date = "2025-04-04"
+compatibility_flags = [
+  "nodejs_compat",
+  "nodejs_compat_populate_process_env",
+]
+
+workers_dev = false
+preview_urls = false
+
+[assets]
+directory = "./build/client/"
+
+[observability]
+enabled = true
+
+[[kv_namespaces]]
+binding = "APP_KV"
+  id = "f87400dad89949d28f247087a0471a1b"
+  preview_id = "f87400dad89949d28f247087a0471a1b"
+
+[[d1_databases]]
+binding = "DB"
+  database_name = "rr7-better-auth"
+  database_id = "ef89a6f5-4122-4e5a-853a-b16ad8a45ee9"
+  preview_database_id = "ef89a6f5-4122-4e5a-853a-b16ad8a45ee9"
+  migrations_dir = "drizzle"
+
+[vars]
+ENVIRONMENT = "production"
+BETTER_AUTH_SECRET = "3ebc25b381e87193f29ffea6b6d380dd"
+BETTER_AUTH_URL = "https://vix.nianyi.dpdns.org"
+GITHUB_CLIENT_ID = "..."
+GITHUB_CLIENT_SECRET = "..."
+GOOGLE_CLIENT_ID = "..."
+GOOGLE_CLIENT_SECRET = "..."

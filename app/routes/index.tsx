@@ -46,6 +46,13 @@ export const meta: Route.MetaFunction = () => {
 
 export default function HomeRoute(_: Route.ComponentProps) {
   const { user } = useAuthUser();
+  const isAuthenticated = Boolean(user);
+  const firstName = isAuthenticated ? user.name.split(" ")[0] : "Guest";
+  const heroDescription = isAuthenticated
+    ? "Multi-account + 三角色仓位 + 预警机制已经配置完毕。点击任意入口即可进入深度分析。"
+    : "多账户展示、三角色仓位与预警机制先行准备，先登录或注册即可体验演示页面。";
+  const ctaHref = isAuthenticated ? "/admin/accounts" : "/auth/sign-in";
+  const ctaLabel = isAuthenticated ? "前往资金管理" : "立即登录试用";
   const navLinks: NavLink[] = [
     {
       icon: PieChartIcon,
@@ -81,19 +88,20 @@ export default function HomeRoute(_: Route.ComponentProps) {
           </p>
           <h1 className="font-semibold text-3xl text-foreground leading-tight sm:text-4xl">
             <span className="mr-2">👋</span>
-            {user.name.split(" ")[0]}，欢迎来到 {AppInfo.name}
+            {firstName}，欢迎来到 {AppInfo.name}
           </h1>
           <p className="max-w-3xl text-base text-muted-foreground">
-            Multi-account + 三角色仓位 +
-            预警机制已经配置完毕。点击任意入口即可进入深度分析。
+            {heroDescription}
           </p>
           <div className="flex flex-wrap gap-3 pt-5">
             <Button variant="default" size="sm" asChild>
-              <Link to={href("/admin/accounts")}>前往资金管理</Link>
+              <Link to={href(ctaHref)}>{ctaLabel}</Link>
             </Button>
-            <Button variant="ghost" size="sm" asChild>
-              <Link to={href("/admin/analytics")}>查看分析与预警</Link>
-            </Button>
+            {isAuthenticated && (
+              <Button variant="ghost" size="sm" asChild>
+                <Link to={href("/admin/analytics")}>查看分析与预警</Link>
+              </Button>
+            )}
           </div>
         </div>
         <div className="mt-8 grid gap-4 sm:grid-cols-3">

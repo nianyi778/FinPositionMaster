@@ -55,3 +55,18 @@ export const requireAuth: MiddlewareFunction = async (
   const session = await processSession(request, context, true);
   return authStorage.run(session, next);
 };
+
+export const loadSessionMiddleware: MiddlewareFunction = async (
+  { request, context },
+  next,
+) => {
+  const session = await processSession(request, context);
+  return authStorage.run(session, next);
+};
+
+export async function loadAuthSession(
+  request: Request,
+  context: RouterContextProvider,
+) {
+  return processSession(request, context);
+}

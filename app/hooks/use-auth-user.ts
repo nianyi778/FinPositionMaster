@@ -4,8 +4,10 @@ import type { loader as authLayoutLoader } from "~/routes/layout";
 
 export function useAuthUser() {
   const data = useRouteLoaderData<typeof authLayoutLoader>("routes/layout");
-  if (!data) throw new Error("No user data found.");
-  return { ...data };
+  return {
+    user: data?.user ?? null,
+    session: data ?? null,
+  };
 }
 
 export function useAuthAdmin() {

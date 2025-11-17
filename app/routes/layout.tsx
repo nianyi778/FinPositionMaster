@@ -3,13 +3,14 @@ import AppFooter from "~/components/admin/layout/footer";
 import { AppLogo } from "~/components/app-logo";
 import { ColorSchemeToggle } from "~/components/color-scheme-toggle";
 import { UserNav } from "~/components/user-nav";
-import { requireAuth, requireUser } from "~/middlewares/auth-guard";
+import { loadAuthSession, loadSessionMiddleware } from "~/middlewares/auth-guard";
 import type { Route } from "./+types/layout";
 
-export const middleware = [requireAuth];
+export const middleware = [loadSessionMiddleware];
 
-export async function loader(_: Route.LoaderArgs) {
-  return requireUser();
+export async function loader({ request, context }: Route.LoaderArgs) {
+  const session = await loadAuthSession(request, context);
+  return session;
 }
 
 export default function AuthenticatedLayout(_: Route.ComponentProps) {

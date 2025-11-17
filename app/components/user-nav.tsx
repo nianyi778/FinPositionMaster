@@ -1,10 +1,11 @@
 import {
   CircleGaugeIcon,
   HomeIcon,
+  LogInIcon,
   LogOutIcon,
   UserCogIcon,
 } from "lucide-react";
-import { useNavigate, useSubmit } from "react-router";
+import { Link, useNavigate, useSubmit } from "react-router";
 import { Avatar, AvatarFallback, AvatarImage } from "~/components/ui/avatar";
 import {
   DropdownMenu,
@@ -22,6 +23,17 @@ export function UserNav() {
   const { user } = useAuthUser();
   const navigate = useNavigate();
   const submit = useSubmit();
+
+  if (!user) {
+    return (
+      <Button variant="ghost" size="icon" asChild>
+        <Link to="/auth/sign-in" aria-label="Sign in">
+          <LogInIcon />
+        </Link>
+      </Button>
+    );
+  }
+
   const { avatarUrl, placeholderUrl } = getAvatarUrl(user.image, user.name);
   const initials = user?.name?.slice(0, 2);
   const alt = user?.name ?? "User avatar";

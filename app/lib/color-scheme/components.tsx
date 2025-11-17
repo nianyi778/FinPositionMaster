@@ -9,19 +9,17 @@
  * - Responds to system theme changes
  */
 
-import { useLayoutEffect, useMemo } from "react";
-import {
-  useLocation,
-  useNavigation,
-  useRouteLoaderData,
-  useSubmit,
-} from "react-router";
+import { useEffect, useLayoutEffect, useMemo, useState } from "react";
+import { useFetcher, useRouteLoaderData } from "react-router";
 import { z } from "zod";
 import type { loader as rootLoader } from "~/root";
+import {
+  applyColorSchemeOnClient,
+  getClientColorSchemeOverride,
+} from "./client";
 
 export const ColorSchemeSchema = z.object({
   colorScheme: z.enum(["light", "dark", "system"]),
-  returnTo: z.string().optional(),
 });
 
 export type ColorScheme = z.infer<typeof ColorSchemeSchema>["colorScheme"];
@@ -34,11 +32,22 @@ export function useColorScheme(): ColorScheme {
   const rootLoaderData = useRouteLoaderData<typeof rootLoader>("root");
   const rootColorScheme = rootLoaderData?.colorScheme ?? "system";
 
-  const { formData } = useNavigation();
-  const optimisticColorScheme = formData?.has("colorScheme")
-    ? (formData.get("colorScheme") as ColorScheme)
-    : null;
-  return optimisticColorScheme || rootColorScheme;
+  const [clientOverride, setClientOverride] = useState<ColorScheme | undefined>(
+    () => getClientColorSchemeOverride(),
+  );
+
+  useEffect(() => {
+    if (typeof window === "undefined") return;
+    const handler = (event: Event) => {
+      const detail = (event as CustomEvent<ColorScheme>).detail;
+      setClientOverride(detail);
+    };
+    window.addEventListener("color-scheme-update", handler);
+    return () => window.removeEventListener("color-scheme-update", handler);
+  }, []);
+
+  const override = clientOverride ?? getClientColorSchemeOverride();
+  return override ?? rootColorScheme;
 }
 
 /**
@@ -46,19 +55,18 @@ export function useColorScheme(): ColorScheme {
  * @returns The submit function
  */
 export function useSetColorScheme() {
-  const location = useLocation();
-  const submit = useSubmit();
+  const fetcher = useFetcher();
 
   return (colorScheme: ColorScheme) => {
-    submit(
-      {
-        colorScheme,
-        returnTo: location.pathname + location.search,
-      },
+    if (typeof document !== "undefined") {
+      applyColorSchemeOnClient(colorScheme);
+    }
+
+    fetcher.submit(
+      { colorScheme },
       {
         method: "post",
         action: "/api/color-scheme",
-        preventScrollReset: true,
         replace: true,
       },
     );

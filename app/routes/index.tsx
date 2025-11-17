@@ -47,7 +47,7 @@ export const meta: Route.MetaFunction = () => {
 export default function HomeRoute(_: Route.ComponentProps) {
   const { user } = useAuthUser();
   const isAuthenticated = Boolean(user);
-  const firstName = isAuthenticated ? user.name.split(" ")[0] : "Guest";
+  const firstName = isAuthenticated ? user?.name.split(" ")[0] : "Guest";
   const heroDescription = isAuthenticated
     ? "Multi-account + 三角色仓位 + 预警机制已经配置完毕。点击任意入口即可进入深度分析。"
     : "多账户展示、三角色仓位与预警机制先行准备，先登录或注册即可体验演示页面。";
@@ -79,35 +79,33 @@ export default function HomeRoute(_: Route.ComponentProps) {
 
   return (
     <div className="space-y-12">
-      <section className="relative overflow-hidden rounded-4xl border border-border bg-linear-to-br from-primary/10 via-white to-slate-50 px-8 py-10 shadow-[0_20px_45px_rgba(15,23,42,0.12)]">
-        <div className="-right-10 -top-6 pointer-events-none absolute h-48 w-48 rounded-full bg-linear-to-br from-primary/60 via-cyan-400 to-transparent opacity-70 blur-3xl" />
-        <div className="-left-12 pointer-events-none absolute top-10 h-32 w-32 rounded-full bg-linear-to-br from-emerald-200 to-transparent opacity-80 blur-3xl" />
-        <div className="relative space-y-4 text-slate-900">
-          <p className="font-semibold text-muted-foreground text-sm tracking-[0.4em]">
+      <section className="relative mx-auto rounded-2xl border border-border bg-linear-to-br from-background/90 via-secondary/40 to-background/70 p-6 shadow-lg">
+        <div className="-m-4 absolute inset-0 rounded-2xl border border-border bg-linear-to-r from-transparent via-background/60 to-transparent blur-[60px]" />
+        <div className="pointer-events-none absolute top-6 right-6 h-32 w-32 rounded-full bg-primary/40 blur-[70px]" />
+        <div className="pointer-events-none absolute bottom-8 left-8 h-44 w-44 rounded-full bg-primary/30 blur-[80px]" />
+        <div className="relative space-y-4">
+          <p className="font-semibold text-slate-500 text-xs uppercase tracking-[0.4em]">
             Welcome Back
           </p>
-          <h1 className="font-semibold text-3xl text-foreground leading-tight sm:text-4xl">
-            <span className="mr-2">👋</span>
-            {firstName}，欢迎来到 {AppInfo.name}
-          </h1>
+          <div>
+            <span className="mr-2 text-4xl">👋</span>
+            <h1 className="font-semibold text-3xl leading-tight sm:text-[3rem]">
+              {firstName}，欢迎来到 {AppInfo.name}
+            </h1>
+          </div>
           <p className="max-w-3xl text-base text-muted-foreground">
             {heroDescription}
           </p>
-          <div className="flex flex-wrap gap-3 pt-5">
+          <div className="flex flex-wrap gap-3 pt-4">
             <Button variant="default" size="sm" asChild>
               <Link to={href(ctaHref)}>{ctaLabel}</Link>
             </Button>
             {isAuthenticated && (
               <Button variant="ghost" size="sm" asChild>
-                <Link to={href("/admin/analytics")}>查看分析与预警</Link>
+                <Link to={href("/admin")}>查看分析与预警</Link>
               </Button>
             )}
           </div>
-        </div>
-        <div className="mt-8 grid gap-4 sm:grid-cols-3">
-          <StatChip label="账户总数" value="3" />
-          <StatChip label="目标偏离" value="+6.2%" hint="核心仓" />
-          <StatChip label="预警中" value="3 条" hint="自动监控" />
         </div>
       </section>
 
@@ -126,7 +124,7 @@ export default function HomeRoute(_: Route.ComponentProps) {
         <NavLinks links={navLinks} />
       </section>
 
-      <section className="grid gap-6 rounded-[28px] border border-border bg-gradient-to-br from-slate-900 to-slate-900/70 p-8 text-white shadow-lg shadow-slate-900/40 md:grid-cols-[1fr_1fr]">
+      <section className="grid gap-6 rounded-[28px] border border-border bg-linear-to-br from-slate-900 to-slate-900/70 p-8 text-white shadow-lg shadow-slate-900/40 md:grid-cols-[1fr_1fr]">
         <div className="space-y-4">
           <p className="text-white/60 text-xs uppercase tracking-[0.4em]">
             产品亮点
@@ -162,9 +160,9 @@ export default function HomeRoute(_: Route.ComponentProps) {
         </div>
       </section>
 
-      <section className="grid">
-        <div className="space-y-3 rounded-[28px] border border-border/60 border-dashed bg-gradient-to-br from-slate-100/80 via-white to-white p-6">
-          <p className="text-muted-foreground text-xs uppercase tracking-[0.4em]">
+      <section>
+        <div className="relative space-y-3 rounded-4xl border border-border/50 border-dashed bg-card/90 p-6 shadow-2xl">
+          <p className="font-semibold text-muted-foreground text-xs uppercase tracking-[0.4em]">
             Call to Action
           </p>
           <h4 className="font-semibold text-foreground text-lg">
@@ -190,7 +188,7 @@ function NavLinks({ links }: { links: NavLink[] }) {
       {links.map((link) => (
         <li key={link.label}>
           <span
-            className={`group flex h-full flex-col justify-between rounded-2xl border border-border p-5 text-left transition hover:border-primary/70 hover:bg-gradient-to-br hover:from-primary/10 hover:to-transparent ${
+            className={`group flex h-full flex-col justify-between rounded-2xl border border-border p-5 text-left transition hover:border-primary/70 hover:bg-linear-to-br hover:from-primary/10 hover:to-transparent ${
               link.tone === "primary"
                 ? "bg-linear-to-br from-primary/20 to-primary/5"
                 : "bg-card"
@@ -216,29 +214,5 @@ function NavLinks({ links }: { links: NavLink[] }) {
         </li>
       ))}
     </ul>
-  );
-}
-
-function StatChip({
-  label,
-  value,
-  hint,
-}: {
-  label: string;
-  value: string;
-  hint?: string;
-}) {
-  return (
-    <div className="rounded-2xl border border-border bg-white/80 px-4 py-3 shadow-sm">
-      <p className="font-semibold text-muted-foreground text-xs uppercase tracking-[0.3em]">
-        {label}
-      </p>
-      <p className="font-semibold text-2xl text-foreground">{value}</p>
-      {hint ? (
-        <p className="text-muted-foreground text-xs">{hint}</p>
-      ) : (
-        <span className="text-transparent text-xs">.</span>
-      )}
-    </div>
   );
 }

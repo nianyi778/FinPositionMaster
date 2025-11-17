@@ -5,7 +5,7 @@ import { GithubIcon, GoogleIcon } from "~/components/icons";
  * App info
  */
 export const AppInfo = {
-  name: "React Router(v7) x Better Auth",
+  name: "资金仓位管理系统",
   description:
     "This is a template that can be deployed on Cloudflare Workers, built with React Router v7 (Remix), Better Auth, Drizzle ORM, and D1.",
 } as const;

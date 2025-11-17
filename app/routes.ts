@@ -48,7 +48,6 @@ export default [
         "accounts/:accountId/detail",
         "routes/admin/accounts/$accountId/detail.tsx",
       ),
-      route("analytics", "routes/admin/analytics.tsx"),
       route("users", "routes/admin/users/index.tsx"),
     ]),
   ]),

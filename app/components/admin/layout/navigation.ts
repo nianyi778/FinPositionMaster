@@ -1,11 +1,4 @@
-import {
-  GaugeIcon,
-  LayersIcon,
-  SettingsIcon,
-  ShieldIcon,
-  UserCogIcon,
-  UsersIcon,
-} from "lucide-react";
+import { GaugeIcon, LayersIcon, UsersIcon } from "lucide-react";
 import type { ComponentType } from "react";
 import { href } from "react-router";
 
@@ -63,31 +56,31 @@ export const navigationGroups: NavGroupData[] = [
     id: "nav-b",
     title: "System Settings",
     items: [
-      {
-        icon: UserCogIcon,
-        title: "Roles",
-        url: "/admin/roles",
-      },
-      {
-        icon: ShieldIcon,
-        title: "Permissions",
-        url: "/admin/permissions",
-      },
+      // {
+      //   icon: UserCogIcon,
+      //   title: "Roles",
+      //   url: "/admin/roles",
+      // },
+      // {
+      //   icon: ShieldIcon,
+      //   title: "Permissions",
+      //   url: "/admin/permissions",
+      // },
       {
         icon: LayersIcon,
         title: "账户设置",
         url: href("/admin/accounts/settings"),
       },
-      {
-        title: "Settings",
-        icon: SettingsIcon,
-        items: [
-          {
-            title: "Cache Management",
-            url: "/admin/cache",
-          },
-        ],
-      },
+      // {
+      //   title: "Settings",
+      //   icon: SettingsIcon,
+      //   items: [
+      //     {
+      //       title: "Cache Management",
+      //       url: "/admin/cache",
+      //     },
+      //   ],
+      // },
     ],
   },
 ];

@@ -13,7 +13,7 @@ importers:
         version: 1.13.3(react@19.2.0)
       '@conform-to/zod':
         specifier: ^1.13.3
-        version: 1.13.3(zod@3.25.76)
+        version: 1.13.3(zod@4.1.12)
       '@origin-space/image-cropper':
         specifier: ^0.1.9
         version: 0.1.9(react-dom@19.2.0(react@19.2.0))(react@19.2.0)
@@ -114,8 +114,8 @@ importers:
         specifier: ^1.0.7
         version: 1.0.7(tailwindcss@4.1.17)
       zod:
-        specifier: ^3.25.76
-        version: 3.25.76
+        specifier: ^4.1.12
+        version: 4.1.12
     devDependencies:
       '@biomejs/biome':
         specifier: 2.3.5
@@ -3430,6 +3430,7 @@ packages:
   wrangler@4.48.0:
     resolution: {integrity: sha512-qkcwysx96XNDWXl4w/5VjAZjqWatxAq9chMXVeqv/etL9e06ouPaZ+Hwwbe5XYV2GYf/XhZVZ3fHJcTBrq60gQ==}
     engines: {node: '>=18.0.0'}
+    deprecated: Unexpected API fields cause wrangler deploy to crash in some code paths. Downgrade to wrangler@4.47
     hasBin: true
     peerDependencies:
       '@cloudflare/workers-types': ^4.20251109.0
@@ -3903,10 +3904,10 @@ snapshots:
       '@conform-to/dom': 1.13.3
       react: 19.2.0
 
-  '@conform-to/zod@1.13.3(zod@3.25.76)':
+  '@conform-to/zod@1.13.3(zod@4.1.12)':
     dependencies:
       '@conform-to/dom': 1.13.3
-      zod: 3.25.76
+      zod: 4.1.12
 
   '@cspotcode/source-map-support@0.8.1':
     dependencies:
